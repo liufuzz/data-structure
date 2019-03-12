@@ -51,10 +51,44 @@ function Stack() {
 }
 
 // 测试
-var stack = new Stack();
+// var stack = new Stack();
 
-console.log(stack.isEmpty());
-stack.push(1);
-stack.push(2);
+// console.log(stack.isEmpty());
+// stack.push(1);
+// stack.push(2);
 
-stack.print();
+// stack.print();
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ * leetcode 20号题，有效的括号
+ */
+var isValid = function(s) {
+  
+  var stack = new Stack();
+
+  for (var i = 0; i < s.length; i++) {
+    var c = s.charAt(i);
+    if (c == '(' || c == '[' || c == '{') {
+      stack.push(c);
+    } else {
+      if (stack.isEmpty()) {
+        return false;
+      }
+      var e = stack.pop();
+      if (c == ')' && e != '(') {
+        return false;
+      }
+      if (c == ']' && e != '[') {
+        return false;
+      }
+      if (c == '}' && e != '{') {
+        return false;
+      }
+    }
+  }
+  return stack.isEmpty();
+};
+
+isValid('(){}[]');
