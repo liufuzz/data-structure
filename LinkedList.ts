@@ -1,6 +1,7 @@
 /*
 ---------实现链表----------
-
+      最基础的动态数据结构  时间复杂度为 O(n)
+      *对链表头操作 时间复杂度为 O(1)
 */
 
 function LinkedList() {
@@ -99,6 +100,34 @@ function LinkedList() {
     return false;
   };
 
+  // 从链表中删除index位置的元素,返回删除元素
+  this.remove = index => {
+    if (index < 0 || index > size) {
+      throw 'remove failed. Illegal index';
+    }
+
+    var prev = dummyHead;
+    for (var i = 0; i < index; i++) {
+      prev = prev.next;
+    }
+    var retNode = prev.next;
+    prev.next = retNode.next;
+    retNode.next = null;
+    size--;
+
+    return retNode.e;
+  };
+
+  // 从链表中删除第一个元素,返回删除元素
+  this.removeFirst = () => {
+    return this.remove(0);
+  };
+
+  // 从链表中删除最后一个元素,返回删除元素
+  this.removeFirst = () => {
+    return this.remove(size - 1);
+  };
+
   // 打印链表
   this.print = () => {
     var cur = dummyHead.next;
@@ -108,7 +137,6 @@ function LinkedList() {
     }
   };
 }
-
 
 // 测试
 var linkedList = new LinkedList();
