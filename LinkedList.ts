@@ -146,3 +146,28 @@ for (var i = 0; i < 5; i++) {
 }
 linkedList.set(2, 'v');
 linkedList.print();
+
+/**
+ * leetcode 203 号题目 递归实现
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @param {number} val
+ * @return {ListNode}
+ */
+
+var removeElements = function(head, val) {
+
+  if(head == null) {
+    return head;
+  };
+
+  head.next = removeElements(head.next, val);
+  return head.val == val ? head.next : head;
+
+};
