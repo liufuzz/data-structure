@@ -2,6 +2,7 @@
 ----------二分搜索树----------
 */
 
+
 function BST() {
   function Node(e) {
     (this.e = e), (this.left = null);
@@ -79,6 +80,23 @@ function BST() {
     _preOrder(node.left);
     _preOrder(node.right);
   }
+
+  //非递归前序遍历实现
+  // this.preOrderNR = () => {
+  //   var stack = new Stack();
+  //   stack.push(root);
+  //   while(!stack.isEmpty()){
+  //     var cur = stack.pop();
+  //     console.log(cur.e);
+
+  //     if(cur.right != null) {
+  //       stack.push(cur.right);
+  //     }
+  //     if(cur.left != null) {
+  //       stack.push(cur.left);
+  //     }
+  //   }
+  // }
 }
 
 /**
@@ -90,3 +108,4 @@ arr.forEach(x => {
   bst.add(x);
 });
 bst.preOrder();
+bst.preOrderNR();
