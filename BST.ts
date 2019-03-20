@@ -2,7 +2,6 @@
 ----------二分搜索树----------
 */
 
-
 function BST() {
   function Node(e) {
     (this.e = e), (this.left = null);
@@ -81,22 +80,35 @@ function BST() {
     _preOrder(node.right);
   }
 
-  //非递归前序遍历实现
-  // this.preOrderNR = () => {
-  //   var stack = new Stack();
-  //   stack.push(root);
-  //   while(!stack.isEmpty()){
-  //     var cur = stack.pop();
-  //     console.log(cur.e);
+  //寻找二分搜索树的最小值
+  this.minimum = () => {
+    if (size == 0) {
+      throw 'is Empty';
+    }
+    return _minimum(root).e;
+  };
+  //返回以node为根的二分搜索树的最小值所在的节点
+  function _minimum(node) {
+    if (node.left == null) {
+      return node;
+    }
+    return _minimum(node.left);
+  }
 
-  //     if(cur.right != null) {
-  //       stack.push(cur.right);
-  //     }
-  //     if(cur.left != null) {
-  //       stack.push(cur.left);
-  //     }
-  //   }
-  // }
+  //寻找二分搜索树的最大值
+  this.maximum = () => {
+    if (size == 0) {
+      throw 'is Empty';
+    }
+    return _maximum(root).e;
+  };
+  //返回以node为根的二分搜索树的最大值所在的节点
+  function _maximum(node) {
+    if (node.right == null) {
+      return node;
+    }
+    return _maximum(node.right);
+  }
 }
 
 /**
@@ -109,3 +121,20 @@ arr.forEach(x => {
 });
 bst.preOrder();
 bst.preOrderNR();
+
+//非递归前序遍历实现(使用栈实现)
+// this.preOrderNR = () => {
+//   var stack = new Stack();
+//   stack.push(root);
+//   while(!stack.isEmpty()){
+//     var cur = stack.pop();
+//     console.log(cur.e);
+
+//     if(cur.right != null) {
+//       stack.push(cur.right);
+//     }
+//     if(cur.left != null) {
+//       stack.push(cur.left);
+//     }
+//   }
+// }
