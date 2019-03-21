@@ -109,6 +109,44 @@ function BST() {
     }
     return _maximum(node.right);
   }
+
+  //从二分搜索树中删除最小值所在的节点,返回最小值
+  this.removeMin = () => {
+    var ret = this.minimum();
+    _removeMin(root);
+    return ret;
+  };
+  //删除掉以node为根的二分搜索树中的最小节点
+  //返回删除后的新的二分搜索树的根
+  function _removeMin(node) {
+    if (node.left == null) {
+      var rightNode = node.right;
+      node.right = null;
+      size--;
+      return rightNode;
+    }
+    node.left = _removeMin(node.left);
+    return node;
+  }
+
+  //从二分搜索树中删除最大值所在的节点,返回最大值
+  this.removeMax = () => {
+    var ret = this.maximum();
+    _removeMax(root);
+    return ret;
+  };
+  //删除掉以node为根的二分搜索树中的最大节点
+  //返回删除后的新的二分搜索树的根
+  function _removeMax(node) {
+    if (node.right == null) {
+      var leftNode = node.left;
+      node.left = null;
+      size--;
+      return leftNode;
+    }
+    node.right = _removeMax(node.right);
+    return node;
+  }
 }
 
 /**
@@ -120,7 +158,9 @@ arr.forEach(x => {
   bst.add(x);
 });
 bst.preOrder();
-bst.preOrderNR();
+//bst.preOrderNR();
+bst.removeMin();
+bst.preOrder()
 
 //非递归前序遍历实现(使用栈实现)
 // this.preOrderNR = () => {
