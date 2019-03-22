@@ -147,6 +147,45 @@ function BST() {
     node.right = _removeMax(node.right);
     return node;
   }
+
+  //从二分搜索树中删除元素为e的节点
+  this.remove = e => {
+    root = _remove(root, e);
+  };
+  //删除以node为根的二分搜索树中值为e的节点, 递归算法
+  //返回删除节点后新的二分搜索树的根
+  function _remove(node, e) {
+    if (node == null) {
+      return null;
+    }
+    if (e < node.e) {
+      node.left = _remove(node.left, e);
+      return node;
+    } else if (e > node.e) {
+      node.right = _remove(node.right, e);
+      return node;
+    } else {
+      if (node.left == null) {
+        var rightNode = node.right;
+        node.right = null;
+        size--;
+        return rightNode;
+      }
+      if (node.right == null) {
+        var leftNode = node.left;
+        node.left = null;
+        size--;
+        return leftNode;
+      }
+
+      var successor = this.minimum(node.right);
+      successor.right = this.removeMin(node.right);
+      successor.left = node.left;
+
+      node.left = node.right = null;
+      return successor;
+    }
+  }
 }
 
 /**
@@ -157,10 +196,11 @@ var arr = [5, 3, 6, 8, 4, 2, 9];
 arr.forEach(x => {
   bst.add(x);
 });
+bst.remove(2);
 bst.preOrder();
 //bst.preOrderNR();
-bst.removeMin();
-bst.preOrder()
+//bst.removeMin();
+//bst.preOrder();
 
 //非递归前序遍历实现(使用栈实现)
 // this.preOrderNR = () => {
