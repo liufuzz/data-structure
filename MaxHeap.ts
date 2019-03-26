@@ -72,6 +72,22 @@ class MaxHeap {
         k = j;
       }
     }
-  } 
+  }
+
+  //取出堆中最大元素, 并替换成元素e
+  public replace(e: any) {
+    let ret = this.data[0];
+    this.data[0] = e;
+    this.siftDown(0);
+    return ret;
+  }
+
+  //将一个数组转换成最大堆
+  public heapify(arr: Array<any>) {
+    this.data = arr;
+    for(let i = this.parent(arr.length - 1); i >= 0; i--) {
+      this.siftDown(i);
+    }
+  }
 }
 
